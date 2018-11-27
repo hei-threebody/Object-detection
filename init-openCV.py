@@ -16,14 +16,14 @@ if __name__ == '__main__':
             # Display the resulting frame
             cv2.imshow('frame', frame)
             fps.update()
-        
+
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-        else:
-            break
+            else:
+                break
 
     # When everything done, release the capture
     fps.stop()
     vs.stop()
     cv2.destroyAllWindows()
-    
+

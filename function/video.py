@@ -23,7 +23,7 @@ def video(args):
     output_q = Queue(maxsize=args["queue_size"])
     output_pq = PriorityQueue(maxsize=3*args["queue_size"])
     pool = Pool(args["num_workers"], worker, (input_q,output_q))
-    
+
     # created a threaded video stream and start the FPS counter
     vs = cv2.VideoCapture("inputs/{}".format(args["input_videos"]))
     fps = FPS().start()
@@ -55,7 +55,7 @@ def video(args):
         if not input_q.full():
             # Read frame and store in input queue
             ret, frame = vs.read()
-            if ret:            
+            if ret:
                 input_q.put((int(vs.get(cv2.CAP_PROP_POS_FRAMES)),frame))
                 countReadFrame = countReadFrame + 1
                 if firstReadFrame:
@@ -69,7 +69,7 @@ def video(args):
             if firstTreatedFrame:
                 print(" --> Recovering the first treated frame.\n")
                 firstTreatedFrame = False
-                
+
         # Check output priority queue is not empty
         if not output_pq.empty():
             prior, output_frame = output_pq.get()
@@ -92,7 +92,7 @@ def video(args):
                     print(" --> Start using recovered frame (displaying and/or writing).\n")
                     firstUsedFrame = False
 
-                
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
@@ -102,12 +102,12 @@ def video(args):
 
 
     print("\nFile have been successfully read and treated:\n  --> {}/{} read frames \n  --> {}/{} write frames \n".format(countReadFrame,nFrame,countWriteFrame-1,nFrame))
-    
+
     # When everything done, release the capture
     fps.stop()
     pool.terminate()
     vs.release()
     if args["output"]:
         out.release()
-    cv2.destroyAllWindows()
-    
+        cv2.destroyAllWindows()
+

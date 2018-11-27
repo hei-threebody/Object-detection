@@ -1,5 +1,11 @@
 # Object-detection
 
+# Statement
+
+This repository is fork from lbeaucourt/Object-detection, and I'm using it to make something for my paper, so you would not waste your time to try to use thin repository. At last, thanks to @lbeaucourt.
+
+# description
+
 Apply tensorflow object detection on input video stream. One could use webcam (or any other device) stream or send a video file. It is possible to write Output put file with detection boxes.
 
 # To use it:

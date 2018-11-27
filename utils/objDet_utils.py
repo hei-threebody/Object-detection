@@ -62,7 +62,7 @@ def worker(input_q, output_q):
             serialized_graph = fid.read()
             od_graph_def.ParseFromString(serialized_graph)
             tf.import_graph_def(od_graph_def, name='')
-        sess = tf.Session(graph=detection_graph)
+            sess = tf.Session(graph=detection_graph)
 
     fps = FPS().start()
     while True:
@@ -76,5 +76,5 @@ def worker(input_q, output_q):
         else:
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             output_q.put(detect_objects(frame_rgb, sess, detection_graph))
-    fps.stop()
-    sess.close()
+            fps.stop()
+            sess.close()
